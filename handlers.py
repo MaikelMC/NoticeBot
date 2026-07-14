@@ -97,6 +97,24 @@ def _truncate_for_telegram(text: str) -> str:
     return text[:TELEGRAM_MAX_LENGTH - 20] + "\n\n<i>... truncado</i>"
 
 
+def _format_final_response(text: str) -> str:
+    """
+    Add a professional footer with date/time to the response.
+    """
+    from datetime import datetime
+
+    now = datetime.now()
+    date_str = now.strftime("%d/%m/%Y %H:%M")
+    footer = f"\n\n📅 <i>{date_str} · 🔍 Buscado por Kynari</i>"
+
+    # Reserve space for footer when truncating
+    max_content = TELEGRAM_MAX_LENGTH - len(footer)
+    if len(text) > max_content:
+        text = text[:max_content - 20] + "\n\n<i>... truncado</i>"
+
+    return text + footer
+
+
 # ─── Helper: send typing indicator ───────────────────────────────
 
 async def _send_typing(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -133,6 +151,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         )
 
     greeting = _clean_response(greeting)
+    greeting = _format_final_response(greeting)
 
     await update.message.reply_text(
         text=greeting,
@@ -282,7 +301,7 @@ async def _perform_search_and_reply(
         logger.debug(f"Raw response ({len(response)} chars): {response[:200]}...")
         response = _clean_response(response)
         logger.debug(f"Cleaned response ({len(response)} chars): {response[:200]}...")
-        response = _truncate_for_telegram(response)
+        response = _format_final_response(response)
 
         await searching_msg.edit_text(
             text=response,

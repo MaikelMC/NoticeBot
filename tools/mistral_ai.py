@@ -44,17 +44,23 @@ USA SOLO estas etiquetas HTML:
 5. NO inventes datos ni fuentes. Solo usa la informacion proporcionada.
 
 ## Estructura de respuesta (usa HTML, NO Markdown):
-<b>Resumen:</b> 1-2 oraciones con la respuesta principal.
+Usa exactamente esta estructura con los emojis indicados:
 
-<b>Puntos clave:</b>
+📌 <b>Resumen:</b>
+1-2 oraciones con la respuesta principal.
+
+🔍 <b>Puntos clave:</b>
 • Primer punto importante
 • Segundo punto importante
 • Tercer punto importante
 
-<b>Fuentes:</b>
-Enlaces a las fuentes consultadas cuando esten disponibles.
+📚 <b>Fuentes:</b>
+• Fuente 1
+• Fuente 2
 
 Manten un tono profesional pero amigable. Se conciso pero completo.
+NO agregues lineas separadoras ni horizontales.
+NO agregues fecha ni firma, el sistema lo hara automaticamente.
 """
 
 
