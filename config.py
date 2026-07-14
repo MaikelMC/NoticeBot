@@ -29,6 +29,7 @@ if not TAVILY_API_KEY:
     logging.warning("TAVILY_API_KEY is not set!")
 TAVILY_SEARCH_DEPTH = os.getenv("TAVILY_SEARCH_DEPTH", "advanced")
 MAX_SEARCH_RESULTS = int(os.getenv("MAX_SEARCH_RESULTS", "8"))
+SEARCH_TIMELIMIT = os.getenv("SEARCH_TIMELIMIT", "m")  # d=day, w=week, m=month, y=year
 
 # --- Bot Settings ---
 BOT_USERNAME = os.getenv("BOT_USERNAME", "KynariBot")

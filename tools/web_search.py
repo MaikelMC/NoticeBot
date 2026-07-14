@@ -11,7 +11,7 @@ from typing import Optional
 
 from ddgs import DDGS
 
-from config import MAX_SEARCH_RESULTS
+from config import MAX_SEARCH_RESULTS, SEARCH_TIMELIMIT
 
 logger = logging.getLogger(__name__)
 
@@ -46,11 +46,11 @@ async def search_web(
         raise WebSearchError("Empty search query provided.")
 
     try:
-        logger.info(f"Searching web via DuckDuckGo: '{query}' (max_results={max_results})")
+        logger.info(f"Searching web via DuckDuckGo: '{query}' (max_results={max_results}, timelimit={SEARCH_TIMELIMIT})")
 
         def _sync_search():
             with DDGS() as ddgs:
-                return list(ddgs.text(query, max_results=max_results))
+                return list(ddgs.text(query, max_results=max_results, timelimit=SEARCH_TIMELIMIT))
 
         raw_results = await asyncio.to_thread(_sync_search)
 
